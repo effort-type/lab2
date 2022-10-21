@@ -2,7 +2,9 @@
 
 #include <stdio.h>
 #include <stdlib.h> // exit() 사용하기 위함
+#include <string.h> // 문자열 관련 라이브러리
 #include <dlfcn.h>
+
 
 void main()
 {
@@ -18,38 +20,49 @@ void main()
 		exit(1);
 	}
 	
-	add = dlsym(handle, "add");
+    char* cal = (char*)malloc(10*sizeof(char)); // 글자 수
+    int num1, num2; // 입력받을 숫자
 
-	if((error = dlerror()) != NULL) {
-		fprintf(stderr, "%s", error);
-		exit(1);
-	}
+    printf("무슨 연산을 할 것인가? (add, subtract, multiply, divide) : ");
+    scanf("%s", cal);
 
-	subtract = dlsym(handle, "subtract");
+    printf("연산할 숫자 2개를 입력하시오 : ");
+    scanf("%d %d", &num1, &num2);
 
-	if((error = dlerror()) != NULL) {
-		fprintf(stderr, "%s", error);
-		exit(1);
-	}
+    if(strcmp(cal, "add") == 0) {
+        add = dlsym(handle, "add");
 
-    multiply = dlsym(handle, "multiply");
+        if((error = dlerror()) != NULL) {
+            fprintf(stderr, "%s", error);
+            exit(1);
+        }
+        printf("add(%d,%d) = %d\n", num1, num2, (*add) (num1,num2));
+    }else if(strcmp(cal, "subtract") == 0) {
+        subtract = dlsym(handle, "subtract");
 
-	if((error = dlerror()) != NULL) {
-		fprintf(stderr, "%s", error);
-		exit(1);
-	}
+        if((error = dlerror()) != NULL) {
+            fprintf(stderr, "%s", error);
+            exit(1);
+        }    
+        printf("subtract(%d,%d) = %d\n", num1, num2, (*subtract) (num1,num2));
+    }else if (strcmp(cal, "multiply") == 0) {
+        multiply = dlsym(handle, "multiply");
 
-    divide = dlsym(handle, "divide");
+        if((error = dlerror()) != NULL) {
+            fprintf(stderr, "%s", error);
+            exit(1);
+        }
+        printf("multiply(%d,%d) = %d\n", num1, num2, (*multiply) (num1,num2));
+    } else if (strcmp(cal, "divide") == 0) {
+        divide = dlsym(handle, "divide");
 
-	if((error = dlerror()) != NULL) {
-		fprintf(stderr, "%s", error);
-		exit(1);
-	}
-
-	printf("add(1,2) = %d\n", (*add) (1,2));
-	printf("subtract(1,2) = %d\n", (*subtract) (1,2));
-    printf("multiply(1,2) = %d\n", (*multiply) (1,2));
-    printf("divide(2, 1) = %lf\n", divide(2, 1));
+        if((error = dlerror()) != NULL) {
+            fprintf(stderr, "%s", error);
+            exit(1);
+        }
+        printf("divide(%d, %d) = %lf\n", num1, num2, divide(num1,num2));
+    }   
+    
 	dlclose(handle);
     
 }
