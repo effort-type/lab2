@@ -23,13 +23,13 @@ void main()
     char* cal = (char*)malloc(10*sizeof(char)); // 글자 수
     int num1, num2; // 입력받을 숫자
 
-    printf("무슨 연산을 할 것인가? (add, subtract, multiply, divide) : ");
+    printf("무슨 연산을 할 것인가? (+, -, *, /) : ");
     scanf("%s", cal);
 
     printf("연산할 숫자 2개를 입력하시오 : ");
     scanf("%d %d", &num1, &num2);
 
-    if(strcmp(cal, "add") == 0) {
+    if(strcmp(cal, "+") == 0) {
         add = dlsym(handle, "add");
 
         if((error = dlerror()) != NULL) {
@@ -37,7 +37,7 @@ void main()
             exit(1);
         }
         printf("add(%d,%d) = %d\n", num1, num2, (*add) (num1,num2));
-    }else if(strcmp(cal, "subtract") == 0) {
+    }else if(strcmp(cal, "-") == 0) {
         subtract = dlsym(handle, "subtract");
 
         if((error = dlerror()) != NULL) {
@@ -45,7 +45,7 @@ void main()
             exit(1);
         }    
         printf("subtract(%d,%d) = %d\n", num1, num2, (*subtract) (num1,num2));
-    }else if (strcmp(cal, "multiply") == 0) {
+    }else if (strcmp(cal, "*") == 0) {
         multiply = dlsym(handle, "multiply");
 
         if((error = dlerror()) != NULL) {
@@ -53,7 +53,7 @@ void main()
             exit(1);
         }
         printf("multiply(%d,%d) = %d\n", num1, num2, (*multiply) (num1,num2));
-    } else if (strcmp(cal, "divide") == 0) {
+    } else if (strcmp(cal, "/") == 0) {
         divide = dlsym(handle, "divide");
 
         if((error = dlerror()) != NULL) {
