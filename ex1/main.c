@@ -1,6 +1,6 @@
 /* main.c */
 #include <stdio.h>
-#include "staticlib.h"
+#include "./code/staticlib.h"
 
 void main()
 {
