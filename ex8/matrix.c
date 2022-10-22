@@ -12,17 +12,17 @@ void matrixSum(int row, int column, int** matrix1, int** matrix2)
 {
     int result[row][column];
 
-    for(int i = 0; i < column; i++) {
-        for(int j = 0; j < row; j++) {
-            result[j][i] = matrix1[j][i] + matrix2[j][i];
+    for(int i = 0; i < row; i++) {
+        for(int j = 0; j < column; j++) {
+            result[i][j] = matrix1[i][j] + matrix2[i][j];
         }
     }    
 
     printf("-----------matrix Sum-----------\n");
-    for(int i = 0; i < column; i++) {
+    for(int i = 0; i < row; i++) {
         
-        for(int j = 0; j < row; j++) {
-            printf("%5d", result[j][i]);    
+        for(int j = 0; j < column; j++) {
+            printf("%5d", result[i][j]);    
         }
         printf("\n");
     }
@@ -32,10 +32,10 @@ static int num = 0;
 void printMatrix(int** matrix, int column, int row)
 {
     printf("-----------matrix%d-----------\n", num+1);
-    for(int i = 0; i < column; i++) {
+    for(int i = 0; i < row; i++) {
         
-        for(int j = 0; j < row; j++) {
-            printf("%5d", matrix[j][i]);    
+        for(int j = 0; j < column; j++) {
+            printf("%5d", matrix[i][j]);    
         }
         printf("\n");
     }    
@@ -54,29 +54,29 @@ void main()
     int **matrix2;
 
     // matrix1 동적 메모리 할당 (2차원 배열)
-    matrix1 = (int **) malloc (sizeof(int*) * column);
+    matrix1 = (int **) malloc (sizeof(int*) * row);
 
     // matrix2 동적 메모리 할당 (2차원 배열)
-    matrix2 = (int **) malloc (sizeof(int*) * column);
+    matrix2 = (int **) malloc (sizeof(int*) * row);
 
-    for(int i = 0; i < row; i++) {
-        matrix1[i] = (int*) malloc (sizeof(int) * row);
-        matrix2[i] = (int*) malloc (sizeof(int) * row);
+    for(int i = 0; i < column; i++) {
+        matrix1[i] = (int*) malloc (sizeof(int) * column);
+        matrix2[i] = (int*) malloc (sizeof(int) * column);
     }
 
     // 값 입력 받기
-    for(int i = 0; i < column; i++) {
+    for(int i = 0; i < row; i++) {
         
-        for(int j = 0; j < row; j++) {
-            printf("matrix1 [%d][%d] 값을 입력하시오 : ", j, i);    
-            scanf("%d", &matrix1[j][i]);
+        for(int j = 0; j < column; j++) {
+            printf("matrix1 [%d][%d] 값을 입력하시오 : ", i, j);    
+            scanf("%d", &matrix1[i][j]);
         }
     }
-    for(int i = 0; i < column; i++) {
+    for(int i = 0; i < row; i++) {
         
-        for(int j = 0; j < row; j++) {
-            printf("matrix2 [%d][%d] 값을 입력하시오 : ", j, i);    
-            scanf("%d", &matrix2[j][i]);
+        for(int j = 0; j < column; j++) {
+            printf("matrix2 [%d][%d] 값을 입력하시오 : ", i, j);    
+            scanf("%d", &matrix2[i][j]);
         }
     }
 
