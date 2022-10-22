@@ -8,7 +8,7 @@
 #include <string.h>
 #include <errno.h>
 
-void m_perror(const char *str)
+void my_perror(const char *str)
 {
     fprintf(stderr, "%s : %s\n", str, strerror(errno));
 }
@@ -23,7 +23,7 @@ void main(int argc, char *argv[])
     }
 
     if((f = fopen(argv[1], "r")) == NULL) {
-        m_perror("fopen");
+        my_perror("fopen");
         exit(1);
     }
 
