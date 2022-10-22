@@ -28,6 +28,20 @@ void matrixSum(int row, int column, int** matrix1, int** matrix2)
     }
 }
 
+static int num = 0;
+void printMatrix(int** matrix, int column, int row)
+{
+    printf("-----------matrix%d-----------\n", num+1);
+    for(int i = 0; i < column; i++) {
+        
+        for(int j = 0; j < row; j++) {
+            printf("%5d", matrix[j][i]);    
+        }
+        printf("\n");
+    }    
+    num++;
+}
+
 void main()
 {
     int row; // 행
@@ -66,23 +80,8 @@ void main()
         }
     }
 
-    printf("-----------matrix1-----------\n");
-    for(int i = 0; i < column; i++) {
-        
-        for(int j = 0; j < row; j++) {
-            printf("%5d", matrix1[j][i]);    
-        }
-        printf("\n");
-    }
-
-    printf("-----------matrix2-----------\n");
-    for(int i = 0; i < column; i++) {
-        
-        for(int j = 0; j < row; j++) {
-            printf("%5d", matrix2[j][i]);    
-        }
-        printf("\n");
-    }
+    printMatrix(matrix1, column, row);
+    printMatrix(matrix2, column, row);
 
     matrixSum(row, column, matrix1, matrix2);
 
